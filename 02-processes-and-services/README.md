@@ -46,7 +46,7 @@ This command displays the processes currently running in Windows, including thei
 
 ### Evidence
 
-![Tasklist](./01-tasklist.png)
+![Tasklist](./screenshots/01-tasklist.png)
 
 ---
 
@@ -66,7 +66,7 @@ The `explorer.exe` process is responsible for important parts of the Windows use
 
 ### Evidence
 
-![Find Explorer Process](./02-tasklist-findstr-explorer.png)
+![Find Explorer Process](./screenshots/02-tasklist-findstr-explorer.png)
 
 ---
 
@@ -86,7 +86,7 @@ The result confirmed that the `explorer` process was running.
 
 ### Evidence
 
-![PowerShell Explorer Process](./03-powershell-explorer.png)
+![PowerShell Explorer Process](./screenshots/03-powershell-explorer.png)
 
 ---
 
@@ -110,7 +110,7 @@ The output shows the service status, internal name, and display name.
 
 ### Evidence
 
-![Get Service](./04-get-service.png)
+![Get Service](./screenshots/04-get-service.png)
 
 ---
 
@@ -138,7 +138,7 @@ This was an important finding because Windows Update depends on this service to 
 
 ### Evidence
 
-![Windows Update Service](./05-windows-update-service.png)
+![Windows Update Service](./screenshots/05-windows-update-service.png)
 
 ---
 
@@ -158,7 +158,7 @@ This type of command can be useful when investigating why a service is not worki
 
 ### Evidence
 
-![Windows Update Service Details](./06-windows-update-details.png)
+![Windows Update Service Details](./screenshots/06-windows-update-details.png)
 
 ---
 
@@ -178,7 +178,7 @@ This can be useful when troubleshooting whether a required Windows component is 
 
 ### Evidence
 
-![Running Services](./07-running-services.png)
+![Running Services](./screenshots/07-running-services.png)
 
 ---
 
@@ -196,7 +196,7 @@ This returned multiple services related to Windows, including **Windows Update**
 
 ### Evidence
 
-![Windows Services Search](./08-search-windows-services.png)
+![Windows Services Search](./screenshots/08-search-windows-services.png)
 
 ---
 
@@ -226,7 +226,7 @@ This is useful information when troubleshooting a Windows Update problem because
 
 ### Evidence
 
-![Windows Update Configuration](./09-windows-update-config.png)
+![Windows Update Configuration](./screenshots/09-windows-update-config.png)
 
 ---
 
@@ -258,7 +258,7 @@ This is an important troubleshooting result. The command did not resolve the pro
 
 ### Evidence
 
-![Windows Update Restart Failure](./10-restart-windows-update.png)
+![Windows Update Restart Failure](./screenshots/10-restart-windows-update.png)
 
 ---
 
@@ -276,7 +276,7 @@ This confirmed that the Windows Explorer process was running.
 
 ### Evidence
 
-![Explorer Process](./11-explorer-process.png)
+![Explorer Process](./screenshots/11-explorer-process.png)
 
 ---
 
@@ -301,7 +301,7 @@ This type of information can help identify processes that may be consuming exces
 
 ### Evidence
 
-![Explorer Resource Usage](./12-explorer-resources.png)
+![Explorer Resource Usage](./screenshots/12-explorer-resources.png)
 
 ---
 
