@@ -22,14 +22,12 @@ As a Help Desk technician, the goal is to determine whether the issue is related
 - Windows 11
 - Wi-Fi network connection
 - Command Prompt
-- PowerShell
 - Windows networking tools
 
 ## Tools Used
 
 - `ipconfig`
 - `nslookup`
-- `ping`
 - `ipconfig /displaydns`
 - `ipconfig /flushdns`
 - `ipconfig /release`
@@ -39,9 +37,9 @@ As a Help Desk technician, the goal is to determine whether the issue is related
 
 ## 1. Review DHCP and DNS Configuration
 
-The first step is to identify the network configuration assigned to the Windows client.
+The first step is to review the network configuration assigned to the Windows client.
 
-The following information is reviewed:
+The main information reviewed includes:
 
 - IPv4 address
 - Subnet Mask
@@ -60,13 +58,17 @@ ipconfig /all
 
 ![DHCP and DNS Configuration](./screenshots/01-dns-dhcp-config.png)
 
+The active Wi-Fi adapter was identified and its DHCP and DNS configuration was reviewed.
+
+The system was configured to obtain its network configuration automatically through DHCP, with the router providing the DHCP and DNS services.
+
 ---
 
 ## 2. Inspect the DNS Resolver Cache
 
-Windows temporarily stores DNS information in the local DNS resolver cache.
+Windows maintains a local DNS resolver cache containing information from previous DNS lookups.
 
-This can help determine whether previously resolved domains are being stored locally.
+Reviewing the cache can help determine whether previously resolved domains are being stored locally.
 
 ### Command
 
@@ -78,27 +80,29 @@ ipconfig /displaydns
 
 ![DNS Resolver Cache](./screenshots/02-dns-cache.png)
 
+The cache contained previously resolved Microsoft and Office-related domains, demonstrating that Windows was storing DNS resolution information locally.
+
 ---
 
 ## 3. Test DNS Resolution
 
-`nslookup` can be used to test whether the configured DNS server can resolve a domain name.
-
-### Command
+DNS resolution was previously tested in the Network Connectivity Troubleshooting lab using:
 
 ```cmd
 nslookup google.com
 ```
 
-### Evidence
+The test confirmed that the configured DNS server could resolve `google.com` to an IP address.
 
-![DNS Query](./screenshots/03-dns-query.png)
+Because this test and its terminal evidence were already documented in the previous lab, a second screenshot was not necessary here.
+
+This result is used as supporting information for the DNS troubleshooting process.
 
 ---
 
 ## 4. Clear the DNS Resolver Cache
 
-If cached DNS information is suspected to be incorrect or outdated, the local DNS resolver cache can be cleared.
+If cached DNS information is suspected to be outdated or incorrect, the local DNS resolver cache can be cleared.
 
 ### Command
 
@@ -108,13 +112,17 @@ ipconfig /flushdns
 
 ### Evidence
 
-![Flush DNS Cache](./screenshots/04-flushdns.png)
+![Flush DNS Cache](./screenshots/03-flushdns.png)
+
+The command completed successfully and Windows confirmed that the DNS resolver cache was cleared.
+
+This provides a clean starting point for subsequent DNS resolution tests.
 
 ---
 
 ## 5. Release the DHCP Configuration
 
-The current DHCP configuration can be released from the network adapter.
+The current DHCP configuration was released from the network adapters.
 
 ### Command
 
@@ -124,13 +132,19 @@ ipconfig /release
 
 ### Evidence
 
-![DHCP Release](./screenshots/05-dhcp-release.png)
+![DHCP Release](./screenshots/04-dhcp-release.png)
+
+Windows released the DHCP configuration from the active network connection.
+
+Some inactive or virtual adapters reported that their media was disconnected. These messages were expected because the computer contains several virtual network adapters that are not currently connected.
+
+The active Wi-Fi connection was temporarily disconnected as expected.
 
 ---
 
 ## 6. Renew the DHCP Configuration
 
-After releasing the configuration, Windows can request a new DHCP configuration from the DHCP server.
+After releasing the DHCP configuration, Windows was instructed to request a new network configuration from the DHCP server.
 
 ### Command
 
@@ -140,13 +154,17 @@ ipconfig /renew
 
 ### Evidence
 
-![DHCP Renew](./screenshots/06-dhcp-renew.png)
+![DHCP Renew](./screenshots/05-dhcp-renew.png)
+
+The Wi-Fi adapter successfully received network configuration again after the DHCP renewal.
+
+This confirmed that the client was able to communicate with the DHCP service and obtain the required network settings.
 
 ---
 
 ## 7. Verify the Final Configuration
 
-The network configuration is checked again after renewing the DHCP lease.
+The network configuration was checked again after the DHCP renewal.
 
 ### Command
 
@@ -156,20 +174,56 @@ ipconfig /all
 
 ### Evidence
 
-![Final Network Configuration](./screenshots/07-final-config.png)
+![Final Network Configuration](./screenshots/06-final-config.png)
+
+The final configuration confirmed that the Wi-Fi adapter had successfully recovered its:
+
+- IPv4 address
+- Subnet Mask
+- Default Gateway
+- DHCP Server
+- DNS Server
+
+The DHCP lease information was also updated after the renewal.
+
+This confirmed that DHCP configuration was functioning correctly on the Windows client.
 
 ---
 
 ## Findings
 
-_To be completed after performing the troubleshooting exercises._
+| Test | Result | Finding |
+|---|---|---|
+| DHCP configuration | Passed | The Wi-Fi adapter was configured to obtain its network settings automatically |
+| DNS cache review | Passed | Windows contained cached DNS records |
+| DNS resolution | Passed | `nslookup` successfully resolved `google.com` |
+| DNS cache flush | Passed | DNS resolver cache was successfully cleared |
+| DHCP release | Passed | The existing DHCP configuration was released |
+| DHCP renew | Passed | The Wi-Fi adapter successfully obtained network configuration again |
+| Final configuration | Passed | IPv4, gateway, DHCP and DNS configuration were restored |
 
 ## Troubleshooting Relevance
 
-This lab demonstrates basic client-side troubleshooting commonly performed by a Help Desk or IT Support technician when a user reports problems accessing websites or network resources.
+This lab demonstrates a basic client-side troubleshooting workflow that can be used when a user reports problems accessing websites or network resources.
 
-The troubleshooting process focuses on separating DHCP-related problems from DNS-related problems instead of assuming that every connectivity issue has the same cause.
+The troubleshooting process separates DNS-related issues from DHCP-related issues instead of assuming that every network problem has the same cause.
+
+A Help Desk technician can use these steps to determine whether the Windows client has valid network configuration, whether DNS information is being cached, and whether renewing the DHCP configuration restores connectivity.
+
+## Escalation Criteria
+
+If the client cannot obtain a valid DHCP configuration after a release and renewal, or DNS resolution continues to fail after clearing the local cache, further investigation may be required.
+
+Potential escalation areas could include:
+
+- DHCP server availability
+- Router or network infrastructure
+- DNS server availability
+- Network adapter issues
+- Broader network outages
 
 ## Conclusion
 
-_To be completed after the troubleshooting exercises._
+The troubleshooting process confirmed that the Windows client was able to obtain valid network configuration through DHCP and successfully use DNS resolution.
+
+The DHCP release and renewal process restored the client's network configuration, while clearing the DNS cache demonstrated an additional client-side troubleshooting step that can be used when DNS information may be outdated or incorrect.
