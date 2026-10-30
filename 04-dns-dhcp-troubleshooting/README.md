@@ -56,7 +56,7 @@ ipconfig /all
 
 ### Evidence
 
-![DHCP and DNS Configuration](./screenshots/01-dns-dhcp-config.png)
+![DHCP and DNS Configuration](./screenshots/01-dns-dhcp-config.jpg)
 
 The active Wi-Fi adapter was identified and its DHCP and DNS configuration was reviewed.
 
@@ -78,7 +78,7 @@ ipconfig /displaydns
 
 ### Evidence
 
-![DNS Resolver Cache](./screenshots/02-dns-cache.png)
+![DNS Resolver Cache](./screenshots/02-dns-cache.jpg)
 
 The cache contained previously resolved Microsoft and Office-related domains, demonstrating that Windows was storing DNS resolution information locally.
 
@@ -112,7 +112,7 @@ ipconfig /flushdns
 
 ### Evidence
 
-![Flush DNS Cache](./screenshots/03-flushdns.png)
+![Flush DNS Cache](./screenshots/03-flushdns.jpg)
 
 The command completed successfully and Windows confirmed that the DNS resolver cache was cleared.
 
@@ -132,7 +132,7 @@ ipconfig /release
 
 ### Evidence
 
-![DHCP Release](./screenshots/04-dhcp-release.png)
+![DHCP Release](./screenshots/04-dhcp-release.jpg)
 
 Windows released the DHCP configuration from the active network connection.
 
@@ -154,7 +154,7 @@ ipconfig /renew
 
 ### Evidence
 
-![DHCP Renew](./screenshots/05-dhcp-renew.png)
+![DHCP Renew](./screenshots/05-dhcp-renew.jpg)
 
 The Wi-Fi adapter successfully received network configuration again after the DHCP renewal.
 
@@ -174,7 +174,7 @@ ipconfig /all
 
 ### Evidence
 
-![Final Network Configuration](./screenshots/06-final-config.png)
+![Final Network Configuration](./screenshots/06-final-config.jpg)
 
 The final configuration confirmed that the Wi-Fi adapter had successfully recovered its:
 
@@ -227,3 +227,4 @@ Potential escalation areas could include:
 The troubleshooting process confirmed that the Windows client was able to obtain valid network configuration through DHCP and successfully use DNS resolution.
 
 The DHCP release and renewal process restored the client's network configuration, while clearing the DNS cache demonstrated an additional client-side troubleshooting step that can be used when DNS information may be outdated or incorrect.
+
